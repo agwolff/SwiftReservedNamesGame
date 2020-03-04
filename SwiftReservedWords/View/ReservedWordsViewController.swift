@@ -8,8 +8,8 @@
 
 import UIKit
 
+// MARK: Properties and View Lifecycle
 class ReservedWordsViewController: UIViewController {
-    
     var textField = UITextField()
     var checkButton = UIButton()
     var timerLabel = UILabel()
@@ -25,33 +25,37 @@ class ReservedWordsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        populateTableView()
         startTimer()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
     }
 }
 
+// MARK: UI
 extension ReservedWordsViewController {
-    
     func setupUI() {
         self.title = "Swift Reserved Words"
         view.backgroundColor = .white
-        
+        setupScoreLabel()
+        setupTimerLabel()
+        setupTextField()
+        setupCheckButton()
+        setupAndPopulateTableView()
+    }
+    
+    func setupScoreLabel() {
         scoreLabel = UILabel(frame: CGRect(x: 20, y: 60, width: (UIScreen.main.bounds.width / 2 - 20), height: 30))
         scoreLabel.font = scoreLabel.font.withSize(24)
         view.addSubview(scoreLabel)
-        
+    }
+    
+    func setupTimerLabel() {
         timerLabel = UILabel(frame: CGRect(x: (UIScreen.main.bounds.width / 2), y: 60, width: (UIScreen.main.bounds.width / 2 - 20), height: 30))
         timerLabel.textAlignment = .right
         timerLabel.font = scoreLabel.font.withSize(24)
         timerLabel.text = "Time: \(self.timeFormatted(self.totalTimeInSeconds))"
         view.addSubview(timerLabel)
-        
-        
+    }
+    
+    func setupTextField() {
         textField = UITextField(frame: CGRect(x: 20, y: 110, width: UIScreen.main.bounds.width - 40, height: 50))
         textField.autocapitalizationType = .none
         textField.placeholder = "Type the reserved word here"
@@ -62,18 +66,20 @@ extension ReservedWordsViewController {
         textField.layer.borderColor = UIColor.black.cgColor
         textField.delegate = self
         view.addSubview(textField)
-        
+    }
+    
+    func setupCheckButton() {
         checkButton = UIButton(frame: CGRect(x: 20, y: 170, width: UIScreen.main.bounds.width - 40, height: 60))
         checkButton.backgroundColor = .black
         checkButton.layer.cornerRadius = 8
         checkButton.layer.borderWidth = 2.0
         checkButton.layer.borderColor = UIColor.gray.cgColor
-        
         checkButton.setTitle("Check", for: .normal)
-        
         checkButton.addTarget(self, action: #selector(checkIfUserScored), for: .touchUpInside)
         view.addSubview(checkButton)
-        
+    }
+    
+    func setupAndPopulateTableView() {
         tableView = UITableView(frame: CGRect(x: 0, y: 240, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 240))
         tableView.register(ReservedWordTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
         tableView.separatorStyle = .none
@@ -81,12 +87,13 @@ extension ReservedWordsViewController {
         tableView.dataSource = self
         view.addSubview(tableView)
         
-    }
-    
-    func populateTableView() {
         viewModel.populateList()
         updateScore()
     }
+}
+
+// MARK: Timer
+extension ReservedWordsViewController {
     
     func startTimer() {
         self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
@@ -111,7 +118,10 @@ extension ReservedWordsViewController {
         let minutes: Int = (totalSeconds / 60) % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
-    
+}
+
+// MARK: Score Handling
+extension ReservedWordsViewController {
     @objc func checkIfUserScored() {
         guard let text = textField.text else { return }
         if viewModel.didUserScore(word: text) {
@@ -133,14 +143,14 @@ extension ReservedWordsViewController {
         textField.text = ""
     }
     
-    
     func disableButtonAndInput() {
         textField.isUserInteractionEnabled = false
-        checkButton.setTitle("Game Over", for: .normal)
+        checkButton.setTitle("Game Over!", for: .normal)
         checkButton.isEnabled = false
     }
 }
 
+// MARK: Table View Delegates
 extension ReservedWordsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.getList().count
@@ -156,10 +166,10 @@ extension ReservedWordsViewController: UITableViewDelegate, UITableViewDataSourc
         cell.selectionStyle = .none
         
         return cell
-        
     }
 }
 
+// MARK: TextField Delegates
 extension ReservedWordsViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         checkIfUserScored()

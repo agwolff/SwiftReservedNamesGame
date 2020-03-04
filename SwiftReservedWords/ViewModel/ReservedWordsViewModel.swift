@@ -30,20 +30,14 @@ class ReservedWordsViewModel {
         return listOfWords
     }
     
-    public func setItemAsScored(at index: Int) {
-        listOfWords[index].alreadyScored = true
-    }
-    
     public func getTotalScore() -> Int {
         return listOfWords.filter { $0.alreadyScored }.count
     }
     
     public func didUserScore(word: String) -> Bool {
-        if let foundWord = listOfWords.first(where: { $0.wordTitle == word } ) {
-            foundWord.alreadyScored = true
-            return true
-        } else {
-            return false
-        }
+        guard let foundWord = listOfWords.first(where: { $0.wordTitle == word } ) else { return false }
+        
+        foundWord.alreadyScored = true
+        return true
     }
 }

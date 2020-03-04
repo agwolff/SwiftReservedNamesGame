@@ -10,4 +10,5 @@ import UIKit
 
 class ReservedWordTableViewCell: UITableViewCell {
     // add more custom stuff here if necessary
+    //created this class in a separate file just to keep the code outside of the VC
 }
