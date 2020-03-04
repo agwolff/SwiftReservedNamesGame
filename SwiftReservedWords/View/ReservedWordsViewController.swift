@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum GameStatus {
+    case victory
+    case defeat
+}
+
 // MARK: Properties and View Lifecycle
 class ReservedWordsViewController: UIViewController {
     var textField = UITextField()
@@ -107,11 +112,7 @@ extension ReservedWordsViewController {
         if totalTimeInSeconds != 0 {
             totalTimeInSeconds -= 1  // decrease counter timer
         } else {
-            if let timer = self.timer {
-                timer.invalidate()
-                self.timer = nil
-                disableButtonAndInput()
-            }
+            self.completeGame(with: .defeat)
         }
     }
     
@@ -138,16 +139,25 @@ extension ReservedWordsViewController {
             guard let self = self else { return }
             self.scoreLabel.text = "Score: \(self.viewModel.getTotalScore()) / \(self.viewModel.getList().count)"
             self.tableView.reloadData()
+            
+            if self.viewModel.getTotalScore() == self.viewModel.getList().count {
+                self.completeGame(with: .victory)
+            }
         }
     }
     
     func clearTextField() {
         textField.text = ""
     }
-    
-    func disableButtonAndInput() {
+
+    func completeGame(with status: GameStatus) {
+        if let timer = self.timer {
+            timer.invalidate()
+            self.timer = nil
+        }
+        
         textField.isUserInteractionEnabled = false
-        checkButton.setTitle("Game Over!", for: .normal)
+        checkButton.setTitle(status == .victory ? "You Rock 🏁" : "Game Over ⚠️", for: .normal)
         checkButton.isEnabled = false
     }
 }
