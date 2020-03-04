@@ -29,11 +29,13 @@ class ReservedWordsViewController: UIViewController {
     }
 }
 
-// MARK: UI
+// MARK: UI Implementation
 extension ReservedWordsViewController {
     func setupUI() {
         self.title = "Swift Reserved Words"
         view.backgroundColor = .white
+        
+        // Best layout implementation here would be using AutoLayout programatically (NSLayoutConstraints via a util such as UIView extension method to anchor the views in relation to other views, but since this would be outside the scope of this activity, I have opted for using frames0
         setupScoreLabel()
         setupTimerLabel()
         setupTextField()
@@ -81,7 +83,7 @@ extension ReservedWordsViewController {
     
     func setupAndPopulateTableView() {
         tableView = UITableView(frame: CGRect(x: 0, y: 240, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 240))
-        tableView.register(ReservedWordTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self

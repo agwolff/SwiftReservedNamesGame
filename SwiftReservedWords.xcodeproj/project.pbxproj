@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		CF1A92B7240F1FBF00CA467A /* ReservedWordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1A92B6240F1FBF00CA467A /* ReservedWordsViewModel.swift */; };
-		CF1A92B9240F230600CA467A /* ReservedWordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1A92B8240F230600CA467A /* ReservedWordTableViewCell.swift */; };
 		CFC2B7DD240F1D38005B4043 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC2B7DC240F1D38005B4043 /* AppDelegate.swift */; };
 		CFC2B7DF240F1D38005B4043 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC2B7DE240F1D38005B4043 /* SceneDelegate.swift */; };
 		CFC2B7E1240F1D38005B4043 /* ReservedWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC2B7E0240F1D38005B4043 /* ReservedWordsViewController.swift */; };
@@ -31,7 +30,6 @@
 
 /* Begin PBXFileReference section */
 		CF1A92B6240F1FBF00CA467A /* ReservedWordsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedWordsViewModel.swift; sourceTree = "<group>"; };
-		CF1A92B8240F230600CA467A /* ReservedWordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedWordTableViewCell.swift; sourceTree = "<group>"; };
 		CFC2B7D9240F1D38005B4043 /* SwiftReservedWords.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftReservedWords.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFC2B7DC240F1D38005B4043 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFC2B7DE240F1D38005B4043 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,20 +114,11 @@
 		CFC2B7FE240F1D61005B4043 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CFC2B7FF240F1D7B005B4043 /* Custom */,
 				CFC2B7E0240F1D38005B4043 /* ReservedWordsViewController.swift */,
 				CFC2B7E7240F1D3B005B4043 /* LaunchScreen.storyboard */,
 				CFC2B7E2240F1D38005B4043 /* Main.storyboard */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		CFC2B7FF240F1D7B005B4043 /* Custom */ = {
-			isa = PBXGroup;
-			children = (
-				CF1A92B8240F230600CA467A /* ReservedWordTableViewCell.swift */,
-			);
-			path = Custom;
 			sourceTree = "<group>";
 		};
 		CFC2B800240F1D89005B4043 /* Model */ = {
@@ -244,7 +233,6 @@
 				CFC2B7E1240F1D38005B4043 /* ReservedWordsViewController.swift in Sources */,
 				CFC2B802240F1D98005B4043 /* ReservedWord.swift in Sources */,
 				CFC2B7DD240F1D38005B4043 /* AppDelegate.swift in Sources */,
-				CF1A92B9240F230600CA467A /* ReservedWordTableViewCell.swift in Sources */,
 				CF1A92B7240F1FBF00CA467A /* ReservedWordsViewModel.swift in Sources */,
 				CFC2B7DF240F1D38005B4043 /* SceneDelegate.swift in Sources */,
 			);
